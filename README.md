@@ -22,7 +22,8 @@ A Flask + MongoDB student management application (add, update, delete and list s
 
 ## 1. Project Structure
 
-``` . ├── app.py                      # Flask application ├── test_app.py                 # pytest unit tests ├── requirements.txt            # Python dependencies ├── Jenkinsfile                 # Jenkins pipeline definition ├── .github/workflows/ci-cd.yml # GitHub Actions workflow ├── templates/                  # **HTML** templates └── screenshots/                # Evidence images used in this **README** ```
+![Folder structure](Screenshots/CICD-SS21.png)
+
 
 ## 2. Prerequisites
 
@@ -39,7 +40,6 @@ A Flask + MongoDB student management application (add, update, delete and list s
 
 Installation commands (PowerShell as Administrator):
 
-![Folder structure](Screenshots/01-installation-check.png)
 
 Python is installed with `--scope machine` so the Jenkins Windows service can find it.
 
@@ -51,13 +51,10 @@ Run this in PowerShell (as Administrator) to confirm every tool is installed and
 
 Expected result: version numbers for each tool, both services `Running`, and status code `**200**`.
 
-**[**ADD** **SCREENSHOT** 1]** Save as `screenshots/01-installation-check.png`
+![Installation check](Screenshots/CICD-SS2.png).png`
 
-![Installation check](screenshots/01-installation-check.png)
+![Installation check](Screenshots/CICD-SS3.png).png`
 
-**[**ADD** **SCREENSHOT** 2]** Jenkins dashboard open at [http://localhost:**8080**.](http://localhost:**8080**.) Save as `screenshots/02-jenkins-dashboard.png`
-
-![Jenkins dashboard](screenshots/02-jenkins-dashboard.png)
 
 ## 4. Running the Application Locally
 
@@ -67,9 +64,10 @@ All four tests (`test_home_page`, `test_add_student`, `test_update_student`, `te
 
 The app uses a **TLS** CA bundle only for remote MongoDB Atlas connections (`mongodb+srv://`). Local MongoDB connections do not use **TLS**.
 
-**[**ADD** **SCREENSHOT** 3]** Local pytest run showing 4 passed. Save as `screenshots/03-local-tests.png`
-
-![Local tests](screenshots/03-local-tests.png)
+![Local tests](Screenshots/CICD-SS4.png)
+![Local tests](Screenshots/CICD-SS5.png)
+![Local tests](Screenshots/CICD-SS6.png)
+![Local tests](Screenshots/CICD-SS7.png)
 
 ---
 
@@ -89,6 +87,7 @@ The app uses a **TLS** CA bundle only for remote MongoDB Atlas connections (`mon
     ```powershell
     Restart-Service Jenkins
     ```
+![Jenkins](Screenshots/CICD-SS8.png)
 
 ### 5.2 Pipeline job
 
@@ -100,9 +99,10 @@ The app uses a **TLS** CA bundle only for remote MongoDB Atlas connections (`mon
 
 Jenkins clones the repository into its workspace (`C:\ProgramData\Jenkins\.jenkins\workspace\flask-pipeline`) on each build.
 
-**[**ADD** **SCREENSHOT** 4]** Pipeline job configuration page. Save as `screenshots/04-jenkins-job-config.png`
+![Jenkins](Screenshots/CICD-SS10.png)
 
-![Jenkins job configuration](screenshots/04-jenkins-job-config.png)
+![Jenkins](Screenshots/CICD-SS11.png)
+
 
 ### 5.3 Jenkinsfile stages
 
@@ -116,13 +116,7 @@ The `post` section sends an email on success and on failure.
 
 ### 5.4 Pipeline execution
 
-**[**ADD** **SCREENSHOT** 5]** Stage View showing Build, Test and Deploy to Staging all green. Save as `screenshots/05-jenkins-stage-view.png`
-
-![Jenkins stage view](screenshots/05-jenkins-stage-view.png)
-
-**[**ADD** **SCREENSHOT** 6]** Console Output of a successful build (ending with `Finished: **SUCCESS**`). Save as `screenshots/06-jenkins-console-success.png`
-
-![Jenkins console output](screenshots/06-jenkins-console-success.png)
+![Jenkins](Screenshots/CICD-SS12.png)
 
 ### 5.5 Trigger on push to `main`
 
@@ -130,13 +124,9 @@ The job uses **Poll **SCM**** with the schedule `H/2 * * * *`, so Jenkins checks
 
 To test: push any small change to `main` and wait up to two minutes. A new build appears automatically with the cause ***Started by an **SCM** change***.
 
-**[**ADD** **SCREENSHOT** 7]** Poll **SCM** setting under Build Triggers. Save as `screenshots/07-jenkins-poll-scm.png`
+![Poll **SCM** setting](Screenshots/CICD-SS13.png)
 
-![Poll **SCM** setting](screenshots/07-jenkins-poll-scm.png)
-
-**[**ADD** **SCREENSHOT** 8]** A build showing *Started by an **SCM** change*. Save as `screenshots/08-jenkins-scm-trigger.png`
-
-![Build started by **SCM** change](screenshots/08-jenkins-scm-trigger.png)
+![Build started by **SCM** change](Screenshots/CICD-SS15.png)
 
 ### 5.6 Email notifications
 
@@ -154,17 +144,9 @@ An App Password is created in Google Account, Security, 2-Step Verification, App
 
 An email is sent when a build **succeeds** and when it **fails**.
 
-**[**ADD** **SCREENSHOT** 9]** E-mail Notification settings (hide the password). Save as `screenshots/09-jenkins-email-config.png`
+![Email configuration](Screenshots/CICD-SS22.png)
 
-![Email configuration](screenshots/09-jenkins-email-config.png)
-
-**[**ADD** **SCREENSHOT** 10]** Success email received in the inbox. Save as `screenshots/10-email-success.png`
-
-![Success email](screenshots/10-email-success.png)
-
-**[**ADD** **SCREENSHOT** 11]** Failure email received in the inbox (break a test on purpose, push, then fix it). Save as `screenshots/11-email-failure.png`
-
-![Failure email](screenshots/11-email-failure.png)
+![Success email](Screenshots/CICD-SS19.png)
 
 ---
 
@@ -211,9 +193,7 @@ To add a secret: **Repository, Settings, Secrets and variables, Actions, New rep
 
 Inside the workflow, a secret is read as `${{ secrets.STAGING_DEPLOY_KEY }}`. GitHub masks secret values in logs.
 
-**[**ADD** **SCREENSHOT** 12]** Secrets page showing both secret names (values stay hidden). Save as `screenshots/12-github-secrets.png`
-
-![GitHub secrets](screenshots/12-github-secrets.png)
+![GitHub secrets](Screenshots/CICD-SS16.png)
 
 ### 6.5 How to trigger each path
 
@@ -254,3 +234,9 @@ git checkout main git tag v1.0.0 git push origin v1.0.0 ```
 | Jenkins mail step: `Couldn't connect to host, port: localhost, 25` | SMTP is not configured; set it up under *Manage Jenkins, System, E-mail Notification* |
 | Gmail authentication fails | Use a Gmail App Password, not the normal account password |
 | Deploy job fails with `... is missing` | The matching GitHub Secret is not created or is misspelled |
+
+## 8. Conclusion
+
+This project Demonstrates a simple CICD workflow using Jenkins and a node based flask app.
+
+Notes: Please refer to the screenshots folder for further clarification. 
