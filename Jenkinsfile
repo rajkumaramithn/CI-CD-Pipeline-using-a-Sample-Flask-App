@@ -17,7 +17,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                bat 'venv\\Scripts\\py -m pytest -v'
+                bat 'venv\\Scripts\\python -m pytest -v'
             }
         }
         stage('Deploy to Staging') {
