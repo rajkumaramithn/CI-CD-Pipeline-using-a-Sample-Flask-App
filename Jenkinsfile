@@ -10,14 +10,14 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                bat 'python -m venv venv'
+                bat 'py -m venv venv'
                 bat 'venv\\Scripts\\python -m pip install --upgrade pip'
                 bat 'venv\\Scripts\\python -m pip install -r requirements.txt'
             }
         }
         stage('Test') {
             steps {
-                bat 'venv\\Scripts\\python -m pytest -v'
+                bat 'venv\\Scripts\\py -m pytest -v'
             }
         }
         stage('Deploy to Staging') {
