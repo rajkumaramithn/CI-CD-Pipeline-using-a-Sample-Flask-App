@@ -22,7 +22,7 @@ A Flask + MongoDB student management application (add, update, delete and list s
 
 ## 1. Project Structure
 
-![Folder structure](Screenshots/CICD-SS21.png)
+![Folder structure](Screenshots/CICD-SS21.jpg)
 
 
 ## 2. Prerequisites
@@ -51,9 +51,9 @@ Run this in PowerShell (as Administrator) to confirm every tool is installed and
 
 Expected result: version numbers for each tool, both services `Running`, and status code `**200**`.
 
-![Installation check](Screenshots/CICD-SS2.png).png`
+![Installation check](Screenshots/CICD-SS2.jpg).png`
 
-![Installation check](Screenshots/CICD-SS3.png).png`
+![Installation check](Screenshots/CICD-SS3.jpg).png`
 
 
 ## 4. Running the Application Locally
@@ -64,10 +64,10 @@ All four tests (`test_home_page`, `test_add_student`, `test_update_student`, `te
 
 The app uses a **TLS** CA bundle only for remote MongoDB Atlas connections (`mongodb+srv://`). Local MongoDB connections do not use **TLS**.
 
-![Local tests](Screenshots/CICD-SS4.png)
-![Local tests](Screenshots/CICD-SS5.png)
-![Local tests](Screenshots/CICD-SS6.png)
-![Local tests](Screenshots/CICD-SS7.png)
+![Local tests](Screenshots/CICD-SS4.jpg)
+![Local tests](Screenshots/CICD-SS5.jpg)
+![Local tests](Screenshots/CICD-SS6.jpg)
+![Local tests](Screenshots/CICD-SS7.jpg)
 
 ---
 
@@ -87,7 +87,7 @@ The app uses a **TLS** CA bundle only for remote MongoDB Atlas connections (`mon
     ```powershell
     Restart-Service Jenkins
     ```
-![Jenkins](Screenshots/CICD-SS8.png)
+![Jenkins](Screenshots/CICD-SS8.jpg)
 
 ### 5.2 Pipeline job
 
@@ -99,9 +99,9 @@ The app uses a **TLS** CA bundle only for remote MongoDB Atlas connections (`mon
 
 Jenkins clones the repository into its workspace (`C:\ProgramData\Jenkins\.jenkins\workspace\flask-pipeline`) on each build.
 
-![Jenkins](Screenshots/CICD-SS10.png)
+![Jenkins](Screenshots/CICD-SS10.jpg)
 
-![Jenkins](Screenshots/CICD-SS11.png)
+![Jenkins](Screenshots/CICD-SS11.jpg)
 
 
 ### 5.3 Jenkinsfile stages
@@ -116,7 +116,7 @@ The `post` section sends an email on success and on failure.
 
 ### 5.4 Pipeline execution
 
-![Jenkins](Screenshots/CICD-SS12.png)
+![Jenkins](Screenshots/CICD-SS12.jpg)
 
 ### 5.5 Trigger on push to `main`
 
@@ -124,9 +124,9 @@ The job uses **Poll **SCM**** with the schedule `H/2 * * * *`, so Jenkins checks
 
 To test: push any small change to `main` and wait up to two minutes. A new build appears automatically with the cause ***Started by an **SCM** change***.
 
-![Poll **SCM** setting](Screenshots/CICD-SS13.png)
+![Poll **SCM** setting](Screenshots/CICD-SS13.jpg)
 
-![Build started by **SCM** change](Screenshots/CICD-SS15.png)
+![Build started by **SCM** change](Screenshots/CICD-SS15.jpg)
 
 ### 5.6 Email notifications
 
@@ -144,9 +144,9 @@ An App Password is created in Google Account, Security, 2-Step Verification, App
 
 An email is sent when a build **succeeds** and when it **fails**.
 
-![Email configuration](Screenshots/CICD-SS22.png)
+![Email configuration](Screenshots/CICD-SS22.jpg)
 
-![Success email](Screenshots/CICD-SS19.png)
+![Success email](Screenshots/CICD-SS19.jpg)
 
 ---
 
@@ -193,7 +193,7 @@ To add a secret: **Repository, Settings, Secrets and variables, Actions, New rep
 
 Inside the workflow, a secret is read as `${{ secrets.STAGING_DEPLOY_KEY }}`. GitHub masks secret values in logs.
 
-![GitHub secrets](Screenshots/CICD-SS16.png)
+![GitHub secrets](Screenshots/CICD-SS16.jpg)
 
 ### 6.5 How to trigger each path
 
